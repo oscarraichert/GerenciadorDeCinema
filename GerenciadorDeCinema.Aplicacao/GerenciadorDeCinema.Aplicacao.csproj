@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentResults" Version="3.15.0" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GerenciadorDeCinema.Dominio\GerenciadorDeCinema.Dominio.csproj" />
+    <ProjectReference Include="..\GerenciadorDeCinema.Infra.Orm\GerenciadorDeCinema.Infra.Orm.csproj" />
+  </ItemGroup>
+
+</Project>
