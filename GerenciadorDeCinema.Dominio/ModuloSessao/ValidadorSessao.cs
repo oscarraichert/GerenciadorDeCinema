@@ -20,21 +20,9 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
                 .NotNull().WithMessage("O campo horario início é obrigatório")
                 .NotEmpty().WithMessage("O campo horario início é obrigatório");
 
-            RuleFor(x => x.HorarioFim)
-               .NotNull().WithMessage("O campo horario do fim é obrigatório")
-               .NotEmpty().WithMessage("O campo horario do fim é obrigatório");
-
             RuleFor(x => x.ValorIngresso)
                 .NotNull().WithMessage("O campo valor do ingresso é obrigatório")
                 .NotEmpty().WithMessage("O campo valor do ingresso é obrigatório");
-
-            RuleFor(x => x.TipoAnimacao)
-                .NotNull().WithMessage("O campo tipo de animação é obrigatório")
-                .NotEmpty().WithMessage("O campo tipo de animação é obrigatório");
-
-            RuleFor(x => x.TipoAudio)
-                .NotNull().WithMessage("O campo tipo de audio é obrigatório")
-                .NotEmpty().WithMessage("O campo tipo de audio é obrigatório");
         }
     }
 }

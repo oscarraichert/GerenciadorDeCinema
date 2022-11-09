@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GerenciadorDeCinema.Dominio\GerenciadorDeCinema.Dominio.csproj" />
-    <ProjectReference Include="..\GerenciadorDeCinema.Infra.Config\GerenciadorDeCinema.Infra.Config.csproj" />
   </ItemGroup>
 
 </Project>

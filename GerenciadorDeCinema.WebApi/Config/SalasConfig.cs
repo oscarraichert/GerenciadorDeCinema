@@ -6,11 +6,21 @@ namespace GerenciadorDeCinema.WebApi.Config
     {
         public static void ConfigurarSalas(this WebApplication webApplication)
         {
-            var repositorioSala = webApplication.Services.GetService<IRepositorioSala>();
+            using var serviceScope = webApplication.Services.CreateScope();
 
-            var salas = webApplication.Configuration.GetValue<List<Sala>>("ConfiguracaoSalas");
+            var repositorioSala = serviceScope.ServiceProvider.GetService<IRepositorioSala>();
 
-            repositorioSala.InserirSalas(salas);
+            var salas = webApplication.Configuration.GetSection("ConfiguracaoSalas").Get<List<Sala>>();
+
+            var salasRepo = repositorioSala.SelecionarTodos();
+
+            foreach (Sala sala in salas)
+            {
+                if (salasRepo.Any(x => x.Nome == sala.Nome) == false)
+                {
+                    repositorioSala.Inserir(sala);
+                }
+            }            
         }
     }
 }

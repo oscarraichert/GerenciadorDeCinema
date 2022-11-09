@@ -27,15 +27,15 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloFilme
         {
             Result resultado = Validar(novoFilme);
 
-            if (repositorioFilme.VerificarTituloRepetido(novoFilme))
-            {
-                return Result.Fail(new Error("Já existe um filme com esse título"));
-            };            
-
             if (resultado.IsFailed)
             {
                 return Result.Fail(resultado.Errors);
             }
+
+            if (repositorioFilme.VerificarTituloRepetido(novoFilme))
+            {
+                return Result.Fail(new Error("Já existe um filme com esse título"));
+            }          
 
             repositorioFilme.Inserir(novoFilme);
 

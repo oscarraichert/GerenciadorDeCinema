@@ -1,7 +1,7 @@
 ﻿using GerenciadorDeCinema.Dominio.Filmes;
-using GerenciadorDeCinema.Infra.Config;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 
 namespace GerenciadorDeCinema.Infra.Orm.Compartilhado
@@ -10,15 +10,22 @@ namespace GerenciadorDeCinema.Infra.Orm.Compartilhado
     {
         private string connectionString;
 
-        public GerenciadorDeCinemaDbContext(ConnectionStrings connectionStrings)
+        public GerenciadorDeCinemaDbContext(IConfiguration config)
         {
-            this.connectionString = connectionStrings.SqlServer;
+            this.connectionString = config.GetConnectionString("SqlServer");
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlServer(connectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(GerenciadorDeCinemaDbContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

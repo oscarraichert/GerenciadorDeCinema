@@ -6,9 +6,11 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
 {
     public class FormsSessaoViewModel
     {
+        Guid Id { get; set; }
+
         public DateTime Data { get; set; }
 
-        public DateTime HorarioInicio { get; set; }
+        public string HorarioInicio { get; set; }
 
         public decimal ValorIngresso { get; set; }
 
@@ -22,4 +24,13 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
     }
 
     public class InserirSessaoViewModel: FormsSessaoViewModel { }
+
+    public class EditarSessaoViewModel : FormsSessaoViewModel { }
+
+    public class VisualizarSessaoViewModel : FormsSessaoViewModel { }
+
+    public class VisualizarSessaoCompletaViewModel : FormsSessaoViewModel
+    {
+        public string HorarioFim { get; set; }
+    }
 }

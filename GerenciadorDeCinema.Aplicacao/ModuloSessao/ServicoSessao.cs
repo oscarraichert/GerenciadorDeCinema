@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using GerenciadorDeCinema.Aplicacao.Compartilhado;
+using GerenciadorDeCinema.Dominio.ModuloFilme;
 using GerenciadorDeCinema.Dominio.ModuloSessao;
 using GerenciadorDeCinema.Infra.Orm.Compartilhado;
 using System;
@@ -12,11 +13,13 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
 {
     public class ServicoSessao: ServicoBase<Sessao, ValidadorSessao>
     {
+        private readonly IRepositorioFilme repositorioFilme;
         private IRepositorioSessao repositorioSessao;
         private GerenciadorDeCinemaDbContext dbContext;
 
-        public ServicoSessao(IRepositorioSessao repositorioSessao, GerenciadorDeCinemaDbContext dbContext)
+        public ServicoSessao(IRepositorioFilme repositorioFilme, IRepositorioSessao repositorioSessao, GerenciadorDeCinemaDbContext dbContext)
         {
+            this.repositorioFilme = repositorioFilme;
             this.repositorioSessao = repositorioSessao;
             this.dbContext = dbContext;
         }
@@ -35,6 +38,12 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
             dbContext.SaveChanges();
 
             return Result.Ok(novaSessao);
+        }
+
+        public TimeSpan ObterHorarioFinal(Sessao sessao)
+        {
+            var filme = repositorioFilme.SelecionarPorId(sessao.FilmeId);
+            return sessao.HorarioFim = sessao.HorarioInicio.Add(filme.Duracao);
         }
 
         public Result<Sessao> Editar(Sessao sessao)

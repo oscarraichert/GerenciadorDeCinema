@@ -32,7 +32,9 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSala
 
         public void Inserir(Sala novoRegistro)
         {
-            throw new NotImplementedException();
+            salas.Add(novoRegistro);
+
+            dbContext.SaveChanges();
         }
 
         public Sala SelecionarPorId(Guid numero)
@@ -42,12 +44,14 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSala
 
         public List<Sala> SelecionarTodos()
         {
-            throw new NotImplementedException();
+            return salas.ToList();
         }
 
         public void InserirSalas(List<Sala> salas)
         {
             this.salas.AddRange(salas);
+
+            dbContext.SaveChanges();
         }
     }
 }

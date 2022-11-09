@@ -13,5 +13,10 @@ namespace GerenciadorDeCinema.Dominio.ModuloSala
             Nome = nome;
             QuantidadeAssentos = quantidadeAssentos;
         }
+
+        public Sala()
+        {
+
+        }
     }
 }

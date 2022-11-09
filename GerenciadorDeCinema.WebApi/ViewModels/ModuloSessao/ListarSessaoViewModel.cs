@@ -1,0 +1,15 @@
+﻿using GerenciadorDeCinema.Dominio.Filmes;
+
+namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
+{
+    public class ListarSessaoViewModel
+    {
+        public Guid Id { get; set; }
+
+        public DateTime Data { get; set; }
+
+        public string HorarioInicio { get; set; }
+
+        public string FilmeId { get; set; }
+    }
+}

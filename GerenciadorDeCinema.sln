@@ -17,29 +17,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orm", "Orm", "{BCA9F7D1-CC9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorDeCinema.Infra.Orm", "GerenciadorDeCinema.Infra.Orm\GerenciadorDeCinema.Infra.Orm.csproj", "{F514D6CA-B78B-4D25-9296-59BF1C014578}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{C80CB24B-9F51-40C6-8BB8-0E39B321B1CD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BancoDeDados", "BancoDeDados", "{0ED49682-02F4-4AEB-A3A1-F3EFA2A661E4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorDeCinema.Infra.Config", "GerenciadorDeCinema.Infra.Config\GerenciadorDeCinema.Infra.Config.csproj", "{99408FA3-D0FD-41AA-9AC0-EEB99FAE4215}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Aplicação", "4 - Aplicação", "{4BF680AF-962A-4BAF-993A-CC1791183FA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorDeCinema.Aplicacao", "GerenciadorDeCinema.Aplicacao\GerenciadorDeCinema.Aplicacao.csproj", "{39796D3B-6823-46C8-B2F1-EDD162FB246E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorDeCinema.Aplicacao", "GerenciadorDeCinema.Aplicacao\GerenciadorDeCinema.Aplicacao.csproj", "{39796D3B-6823-46C8-B2F1-EDD162FB246E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6 - Testes", "6 - Testes", "{03EB8B7A-87FB-4097-9EB1-ED481DC57C81}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes Unitários", "Testes Unitários", "{1E6A8815-A671-4593-A071-805CA79A0978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorDeCinema.Dominio.Tests", "GerenciadorDeCinema.Dominio.Tests\GerenciadorDeCinema.Dominio.Tests.csproj", "{ED529F13-4C73-4380-B7D0-E4A8066E48AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorDeCinema.Dominio.Tests", "GerenciadorDeCinema.Dominio.Tests\GerenciadorDeCinema.Dominio.Tests.csproj", "{ED529F13-4C73-4380-B7D0-E4A8066E48AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes Infra", "Testes Infra", "{49799123-EF24-4D08-A8D0-3B0FE84F5D61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorDeCinema.Infra.Orm.Tests", "GerenciadorDeCinema.Infra.Orm.Tests\GerenciadorDeCinema.Infra.Orm.Tests.csproj", "{D358F542-8B2D-43A5-9853-F8D9DDA30422}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorDeCinema.Infra.Orm.Tests", "GerenciadorDeCinema.Infra.Orm.Tests\GerenciadorDeCinema.Infra.Orm.Tests.csproj", "{D358F542-8B2D-43A5-9853-F8D9DDA30422}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Distribuição", "5 - Distribuição", "{FD7B0A41-3A29-458F-9FB2-8F8589E4CBCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciadorDeCinema.WebApi", "GerenciadorDeCinema.WebApi\GerenciadorDeCinema.WebApi.csproj", "{2A22808B-CA7B-4FB7-84DC-0BF0833993F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciadorDeCinema.WebApi", "GerenciadorDeCinema.WebApi\GerenciadorDeCinema.WebApi.csproj", "{2A22808B-CA7B-4FB7-84DC-0BF0833993F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +55,6 @@ Global
 		{F514D6CA-B78B-4D25-9296-59BF1C014578}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F514D6CA-B78B-4D25-9296-59BF1C014578}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F514D6CA-B78B-4D25-9296-59BF1C014578}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99408FA3-D0FD-41AA-9AC0-EEB99FAE4215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99408FA3-D0FD-41AA-9AC0-EEB99FAE4215}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99408FA3-D0FD-41AA-9AC0-EEB99FAE4215}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99408FA3-D0FD-41AA-9AC0-EEB99FAE4215}.Release|Any CPU.Build.0 = Release|Any CPU
 		{39796D3B-6823-46C8-B2F1-EDD162FB246E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{39796D3B-6823-46C8-B2F1-EDD162FB246E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39796D3B-6823-46C8-B2F1-EDD162FB246E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -88,9 +80,7 @@ Global
 		{2C5B4A33-51E4-461A-8456-C9E64C65CCF3} = {33D06F63-70FB-45D0-8A8D-04269DADAA0D}
 		{BCA9F7D1-CC92-4906-9B28-290A12AB677F} = {0ED49682-02F4-4AEB-A3A1-F3EFA2A661E4}
 		{F514D6CA-B78B-4D25-9296-59BF1C014578} = {BCA9F7D1-CC92-4906-9B28-290A12AB677F}
-		{C80CB24B-9F51-40C6-8BB8-0E39B321B1CD} = {E22AA3F9-C1FB-4C1B-9295-E1A6DD160BBC}
 		{0ED49682-02F4-4AEB-A3A1-F3EFA2A661E4} = {E22AA3F9-C1FB-4C1B-9295-E1A6DD160BBC}
-		{99408FA3-D0FD-41AA-9AC0-EEB99FAE4215} = {C80CB24B-9F51-40C6-8BB8-0E39B321B1CD}
 		{39796D3B-6823-46C8-B2F1-EDD162FB246E} = {4BF680AF-962A-4BAF-993A-CC1791183FA7}
 		{1E6A8815-A671-4593-A071-805CA79A0978} = {03EB8B7A-87FB-4097-9EB1-ED481DC57C81}
 		{ED529F13-4C73-4380-B7D0-E4A8066E48AC} = {1E6A8815-A671-4593-A071-805CA79A0978}

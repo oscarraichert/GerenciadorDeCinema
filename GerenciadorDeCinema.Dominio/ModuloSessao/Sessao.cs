@@ -3,6 +3,7 @@ using GerenciadorDeCinema.Dominio.Filmes;
 using GerenciadorDeCinema.Dominio.ModuloSala;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
     {
         public DateTime Data { get; set; }
 
-        public DateTime HorarioInicio { get; set; }
+        public TimeSpan HorarioInicio { get; set; }
 
-        public DateTime HorarioFim { get ; set; }
+        public TimeSpan HorarioFim { get ; set; }
 
         public decimal ValorIngresso { get; set; }
 
@@ -23,24 +24,19 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
 
         public TipoAudio TipoAudio { get; set; }
 
+        [NotMapped]
         public Filme Filme { get; set; }
 
-        public string FilmeId { get; set; }
+        public Guid FilmeId { get; set; }
 
+        [NotMapped]
         public Sala Sala { get; set; }
 
         public string SalaId { get; set; }
 
-        public Sessao(DateTime data, DateTime horarioInicio, DateTime horarioFim, decimal valorIngresso, TipoAnimacao tipoAnimacao, TipoAudio tipoAudio, Filme filme, Sala sala)
+        public Sessao()
         {
-            Data = data;
-            HorarioInicio = horarioInicio;
-            ValorIngresso = valorIngresso;
-            TipoAnimacao = tipoAnimacao;
-            TipoAudio = tipoAudio;
-            Filme = filme;
-            Sala = sala;
-            HorarioFim = HorarioInicio + Filme.Duracao;
+                
         }
     }
 

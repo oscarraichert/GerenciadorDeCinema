@@ -11,12 +11,5 @@ namespace GerenciadorDeCinema.Infra.Config
 
             ConnectionStrings = new ConnectionStrings { SqlServer = connectionString }; 
         }
-
-        public ConnectionStrings ConnectionStrings { get; set; }
-    }
-
-    public class ConnectionStrings
-    {
-        public string SqlServer { get; set; }
     }
 }

@@ -5,7 +5,6 @@ using GerenciadorDeCinema.Aplicacao.ModuloSessao;
 using GerenciadorDeCinema.Dominio.ModuloFilme;
 using GerenciadorDeCinema.Dominio.ModuloSala;
 using GerenciadorDeCinema.Dominio.ModuloSessao;
-using GerenciadorDeCinema.Infra.Config;
 using GerenciadorDeCinema.Infra.Orm.Compartilhado;
 using GerenciadorDeCinema.Infra.Orm.ModuloFilme;
 using GerenciadorDeCinema.Infra.Orm.ModuloSala;
@@ -19,15 +18,13 @@ namespace GerenciadorDeCinema.WebApi.Config
         {
             services.AddScoped<GerenciadorDeCinemaDbContext>();
 
-            services.AddSingleton<ConnectionStrings>();
-
-            services.AddScoped<IRepositorioFilme, RepositorioFilmeOrm>();
+            services.AddTransient<IRepositorioFilme, RepositorioFilmeOrm>();
             services.AddTransient<ServicoFilme>();
 
-            services.AddScoped<IRepositorioSessao, RepositorioSessaoOrm>();
+            services.AddTransient<IRepositorioSessao, RepositorioSessaoOrm>();
             services.AddTransient<ServicoSessao>();
 
-            services.AddScoped<IRepositorioSala, RepositorioSalaOrm>();
+            services.AddTransient<IRepositorioSala, RepositorioSalaOrm>();
             services.AddTransient<ServicoSala>();
         }
     }

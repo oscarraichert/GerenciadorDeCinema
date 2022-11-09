@@ -13,18 +13,18 @@ namespace GerenciadorDeCinema.Infra.Orm.Tests.ModuloFilme
 
         public Tests()
         {
-            IConfiguration configuracao = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+            //IConfiguration configuracao = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json")
+            //    .Build();
 
-            var config = new GerenciadorDeCinemaAppConfig(configuracao);
+            //var config = new GerenciadorDeCinemaAppConfig(configuracao);
 
-            db = new GerenciadorDeCinemaDbContext(config.ConnectionStrings);
+            //db = new GerenciadorDeCinemaDbContext(config.ConnectionStrings);
 
-            db.Set<Filme>().RemoveRange(db.Set<Filme>());
+            //db.Set<Filme>().RemoveRange(db.Set<Filme>());
 
-            db.SaveChanges();
+            //db.SaveChanges();
         }
 
         [Test]
