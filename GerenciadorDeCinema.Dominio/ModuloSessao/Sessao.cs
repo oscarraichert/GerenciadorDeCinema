@@ -25,7 +25,7 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
         public TipoAudio TipoAudio { get; set; }
 
         [NotMapped]
-        public Filme Filme { get; set; }
+        public string TituloFilme { get; set; }
 
         public Guid FilmeId { get; set; }
 

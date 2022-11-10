@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GerenciadorDeCinema.Dominio.ModuloAutenticacao;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,10 @@ namespace GerenciadorDeCinema.Dominio.Compartilhado
     public class EntidadeBase
     {
         public Guid Id { get; set; }
+
+        //public Guid UsuarioId { get; set; }
+
+        //public Usuario Usuario { get; set; }
 
         public EntidadeBase()
         {

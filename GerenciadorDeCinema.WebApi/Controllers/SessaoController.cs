@@ -25,8 +25,6 @@ namespace GerenciadorDeCinema.WebApi.Controllers
         {
             var sessao = mapeadorSessoes.Map<Sessao>(sessaoVM);
 
-            sessao.HorarioFim = servicoSessao.ObterHorarioFinal(sessao);
-
             var sessaoResult = servicoSessao.Inserir(sessao);
 
             if (sessaoResult.IsFailed)

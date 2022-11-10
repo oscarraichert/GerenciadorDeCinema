@@ -1,6 +1,7 @@
 ﻿using GerenciadorDeCinema.Dominio.Filmes;
 using GerenciadorDeCinema.Dominio.ModuloSala;
 using GerenciadorDeCinema.Dominio.ModuloSessao;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
 {
@@ -16,7 +17,7 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
 
         public TipoAnimacao TipoAnimacao { get; set; }
 
-        public TipoAudio TipoAudio { get; set; }
+        public TipoAudio TipoAudio { get; set; }        
 
         public string FilmeId { get; set; }
 
@@ -31,6 +32,9 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
 
     public class VisualizarSessaoCompletaViewModel : FormsSessaoViewModel
     {
+        [NotMapped]
+        public string TituloFilme { get; set; }
+
         public string HorarioFim { get; set; }
     }
 }

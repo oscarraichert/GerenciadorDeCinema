@@ -11,5 +11,7 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
         public string HorarioInicio { get; set; }
 
         public string FilmeId { get; set; }
+
+        public string TituloFilme { get; set; }
     }
 }

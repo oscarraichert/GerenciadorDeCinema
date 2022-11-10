@@ -1,5 +1,7 @@
 ﻿using GerenciadorDeCinema.Dominio.Filmes;
-using Microsoft.AspNet.Identity.EntityFramework;
+using GerenciadorDeCinema.Dominio.ModuloAutenticacao;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;

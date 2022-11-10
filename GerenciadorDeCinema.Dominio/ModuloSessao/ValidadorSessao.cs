@@ -14,7 +14,7 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
             RuleFor(x => x.Data)
                 .NotNull().WithMessage("O campo data é obrigatório")
                 .NotEmpty().WithMessage("O campo data é obrigatório")
-                .GreaterThanOrEqualTo((x) => DateTime.Now).WithMessage("A sessão não pode ser em uma data passada");
+                .GreaterThanOrEqualTo((x) => DateTime.Now.Date).WithMessage("A sessão não pode ser em uma data passada");
 
             RuleFor(x => x.HorarioInicio)
                 .NotNull().WithMessage("O campo horario início é obrigatório")

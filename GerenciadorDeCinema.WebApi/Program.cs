@@ -21,11 +21,20 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(builder => builder
+    .WithOrigins("http://localhost:4200")
+    .WithMethods("*")
+    .WithHeaders("*")
+    .Build());
 }
 
-app.ConfigurarSalas();
+app.UseCors(builder => builder
+    .WithOrigins("http://localhost:4200")
+    .WithMethods("*")
+    .WithHeaders("*")
+    .Build());
 
-app.UseHttpsRedirection();
+app.ConfigurarSalas();
 
 app.UseAuthorization();
 

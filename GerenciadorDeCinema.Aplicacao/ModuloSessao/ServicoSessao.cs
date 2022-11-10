@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
 {
-    public class ServicoSessao: ServicoBase<Sessao, ValidadorSessao>
+    public class ServicoSessao : ServicoBase<Sessao, ValidadorSessao>
     {
         private readonly IRepositorioFilme repositorioFilme;
         private IRepositorioSessao repositorioSessao;
@@ -33,6 +33,15 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
                 return Result.Fail(resultado.Errors);
             }
 
+            var sessaoOcupada = VerificarSessaoOcupada(novaSessao);
+
+            if (sessaoOcupada)
+            {
+                return Result.Fail(new Error("O horário inserido não está disponível"));
+            }
+
+            novaSessao.HorarioFim = ObterHorarioFinal(novaSessao).TimeOfDay;
+
             repositorioSessao.Inserir(novaSessao);
 
             dbContext.SaveChanges();
@@ -40,10 +49,28 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
             return Result.Ok(novaSessao);
         }
 
-        public TimeSpan ObterHorarioFinal(Sessao sessao)
+        public bool VerificarSessaoOcupada(Sessao sessao)
+        {
+            var finalSessao = ObterHorarioFinal(sessao);
+
+            var inicioSessao = sessao.Data.Add(sessao.HorarioInicio);
+
+            var sessaoOcupada = repositorioSessao.SelecionarTodos().Any(
+                x => inicioSessao > x.Data.Add(x.HorarioInicio) &&
+                inicioSessao < x.Data.Add(x.HorarioInicio.Add(repositorioFilme.SelecionarPorId(x.FilmeId).Duracao)) &&
+                x.SalaId == sessao.SalaId
+                );
+
+            return sessaoOcupada;
+        }
+
+        public DateTime ObterHorarioFinal(Sessao sessao)
         {
             var filme = repositorioFilme.SelecionarPorId(sessao.FilmeId);
-            return sessao.HorarioFim = sessao.HorarioInicio.Add(filme.Duracao);
+
+            var diaHoraFim = sessao.Data.Add(sessao.HorarioInicio.Add(filme.Duracao));
+
+            return diaHoraFim;
         }
 
         public Result<Sessao> Editar(Sessao sessao)
@@ -87,9 +114,19 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
         {
             var sessao = repositorioSessao.SelecionarPorId(id);
 
+            var filmes = repositorioFilme.SelecionarTodos();
+
             if (sessao == null)
             {
                 return Result.Fail($"Sessao {id} não encontrada");
+            }
+
+            foreach (var filme in filmes)
+            {
+                if (filme.Id == sessao.FilmeId)
+                {
+                    sessao.TituloFilme = filme.Titulo;
+                }
             }
 
             return Result.Ok(sessao);
@@ -98,6 +135,19 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
         public Result<List<Sessao>> SelecionarTodas()
         {
             var sessoes = repositorioSessao.SelecionarTodos();
+
+            var filmes = repositorioFilme.SelecionarTodos();
+
+            foreach (Sessao sessao in sessoes)
+            {
+                foreach (var filme in filmes)
+                {
+                    if (sessao.FilmeId == filme.Id)
+                    {
+                        sessao.TituloFilme = filme.Titulo;
+                    }
+                }
+            }
 
             if (sessoes == null)
             {

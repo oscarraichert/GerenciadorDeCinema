@@ -29,7 +29,9 @@ namespace GerenciadorDeCinema.WebApi.Config.AutoMapperConfig
         private void ConverterDeViewModelParaEntidade()
         {
             CreateMap<InserirSessaoViewModel, Sessao>()
-                .ForMember(destino => destino.Id, opt => opt.Ignore());                
+                .ForMember(destino => destino.Id, opt => opt.Ignore());
+
+            CreateMap<VisualizarSessaoViewModel, Sessao>();
         }
     }
 }
