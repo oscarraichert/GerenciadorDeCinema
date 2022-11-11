@@ -1,0 +1,65 @@
+<div class="mt-5 container py-3">
+  <div class="row card card-color border-black">
+
+    <!-- Principal -->
+    <div class="py-5 col-md-9 mx-auto">
+
+      <!-- Titulo -->
+      <div class="text-md-start">
+        <h1 class="fw-bold">
+          Filmes
+        </h1>
+      </div>
+
+      <!-- Acoes -->
+      <div class="d-grid d-md-flex mt-5">
+        <a [routerLink]="['/filmes/inserir']" role="button"
+          class="btn btn-primary btn-outline-dark fw-semibold text-black">
+          Adicionar Filme
+        </a>
+      </div>
+
+      <!-- Listar Filmes -->
+      <div class="mt-5 card bg-color border-black">
+
+        <table class="table table-color table-hover mt-2">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th>Título</th>
+              <th>Descrição</th>
+              <th>Duração</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-center">
+            <tr *ngFor="let f of (filmes$ | async)">
+              <td>{{ f.titulo }}</td>
+              <td>{{ f.descricao }}</td>
+              <td>{{ f.duracao }}</td>
+
+              <td>
+                <button [routerLink]="['/filmes/visualizar', f.id]" type="button"
+                  class="btn btn-sm btn-primary btn-outline-dark me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-arrows-angle-expand"></i>
+                </button>
+                <button [routerLink]="['/filmes/editar', f.id]" type="button"
+                  class="btn btn-sm btn-primary btn-outline-dark me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button [routerLink]="['/filmes/excluir', f.id]" type="button"
+                  class="btn btn-sm btn-outline-danger me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

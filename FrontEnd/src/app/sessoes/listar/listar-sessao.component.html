@@ -1,0 +1,61 @@
+<div class="mt-5 container py-3">
+  <div class="row card card-color border-black">
+
+    <!-- Principal -->
+    <div class="py-5 col-md-9 mx-auto">
+
+      <!-- Titulo -->
+      <div class="text-md-start">
+        <h1 class="fw-bold">
+          Sessões
+        </h1>
+      </div>
+
+      <!-- Acoes -->
+      <div class="d-grid d-md-flex mt-5">
+        <a [routerLink]="['/sessoes/inserir']" role="button"
+          class="btn btn-primary btn-outline-dark fw-semibold text-black">
+          Adicionar Sessão
+        </a>
+      </div>
+
+      <!-- Listar Filmes -->
+      <div class="mt-5 card bg-color border-black">
+
+        <table class="table table-color table-hover mt-2">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th>Filme</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-center">
+            <tr *ngFor="let s of (sessoes$ | async)">
+              <td>{{ s.tituloFilme }}</td>
+              <td>{{ s.data | date }}</td>
+              <td>{{ s.horarioInicio }}</td>
+
+              <td>
+                <button [routerLink]="['/sessoes/visualizar', s.id]" type="button"
+                  class="btn btn-sm btn-primary btn-outline-dark me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-arrows-angle-expand"></i>
+                </button>
+                <button [routerLink]="['/sessoes/excluir', s.id]" type="button"
+                  class="btn btn-sm btn-outline-danger me-0 me-md-1 mb-1 mb-md-auto">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

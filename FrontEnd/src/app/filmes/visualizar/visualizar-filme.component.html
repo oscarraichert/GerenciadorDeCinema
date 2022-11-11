@@ -1,0 +1,56 @@
+<div class="mt-5 container py-3">
+  <div class="row card card-color border-black">
+
+    <!-- Principal -->
+    <div class="py-5 col-md-9 mx-auto">
+
+      <!-- Titulo -->
+      <div class="text-md-start">
+        <h1 class="fw-bold">
+          Visualizar Filme
+        </h1>
+      </div>
+
+      <dl class="form-group mt-4 row">
+
+        <dt class="col-md-8">
+          <div class="card limit bg-color">
+            <img [src]="filmeFormVM.imagem" alt="" class="limit p-2">
+          </div>
+        </dt>
+        <dd></dd>
+      </dl>
+
+      <dl class="form-group mt-4 row">
+        <dt class="col-md-4">
+          <label class="control-label">Título:</label>
+        </dt>
+        <dd class="col-md-8">
+          {{ filmeFormVM.titulo }}
+        </dd>
+
+        <dt class="col-md-4">
+          <label class="control-label">Descrição:</label>
+        </dt>
+        <dd class="col-md-8">
+          {{ filmeFormVM.descricao }}
+        </dd>
+
+        <dt class="col-md-4">
+          <label class="control-label">Duração:</label>
+        </dt>
+        <dd class="col-md-8">
+          {{ filmeFormVM.duracao }}
+        </dd>
+      </dl>
+
+      <div class="card-footer g-grid d-flex gap-1 mt-5">
+        <button routerLink="/filmes/listar" type="button" class="btn btn-outline-dark px-5">
+          <i class="bi bi-arrow-return-left me-2"></i>
+          Voltar
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

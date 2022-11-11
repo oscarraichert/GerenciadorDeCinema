@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+.table-color {
+  background-color: #52796F;
+  color: rgb(0, 0, 0);
+}
+
+.bg-color {
+  background-color: #354F52;
+  color: rgb(0, 0, 0);
+}
+
+.card-color {
+  background-color: #ffffff;
+  color: #2F3E46 !important;
+}
+
+.btn-primary {
+  color: #ffffff !important;
+  background-color: #354F52;
+}
+
+.btn-primary:hover {
+  color: rgb(255, 255, 255) !important;
+  outline: white !important;
+  background-color: #84A98C;
+}
+
+.limit {
+  max-width: 400px;
+}
