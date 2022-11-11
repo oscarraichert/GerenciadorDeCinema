@@ -23,7 +23,7 @@ namespace GerenciadorDeCinema.Infra.Tests
         public void deve_inserir_a_entidade_no_banco()
         {
             Filme filme = new(
-                "imagem teste",
+                "imagem testee",
                 "titulo teste infra",
                 "descricao teste",
                 new TimeSpan(1, 30, 25)
