@@ -2,6 +2,7 @@
 using GerenciadorDeCinema.Aplicacao.Compartilhado;
 using GerenciadorDeCinema.Dominio.Filmes;
 using GerenciadorDeCinema.Dominio.ModuloFilme;
+using GerenciadorDeCinema.Dominio.ModuloSessao;
 using GerenciadorDeCinema.Infra.Orm.Compartilhado;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloFilme
     public class ServicoFilme: ServicoBase<Filme, ValidadorFilme>
     {
         private IRepositorioFilme repositorioFilme;
+        private IRepositorioSessao repositorioSessao;
         private GerenciadorDeCinemaDbContext dbContext;
 
 
-        public ServicoFilme(IRepositorioFilme repositorioFilme, GerenciadorDeCinemaDbContext dbContext)
+        public ServicoFilme(IRepositorioFilme repositorioFilme, IRepositorioSessao repositorioSessao, GerenciadorDeCinemaDbContext dbContext)
         {
+            this.repositorioSessao = repositorioSessao;
             this.repositorioFilme = repositorioFilme;
             this.dbContext = dbContext;
         }
@@ -71,6 +74,13 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloFilme
 
         private Result Excluir(Filme filme)
         {
+            var sessoes = repositorioSessao.SelecionarTodos();
+
+            if (sessoes.Any(sessao => sessao.FilmeId == filme.Id))
+            {
+                return Result.Fail(new Error("O filme está vinculado a uma sessão"));
+            }
+
             repositorioFilme.Excluir(filme);
 
             dbContext.SaveChanges();

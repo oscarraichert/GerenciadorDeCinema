@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GerenciadorDeCinema.Aplicacao.ModuloSala;
 using GerenciadorDeCinema.WebApi.ViewModels.ModuloSala;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
 {
     [Route("api/salas")]
     [ApiController]
+    [Authorize]
     public class SalaController : GerenciadorDeCinemaControllerBase
     {
         private readonly ServicoSala servicoSala;

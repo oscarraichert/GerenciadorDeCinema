@@ -26,7 +26,7 @@
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Horário de Início:</label>
           <input [ngClass]="horarioInicio?.touched && horarioInicio?.invalid ? 'is-invalid' : ''"
-            formControlName="horarioInicio" class="form-control" type="text" placeholder="Insira o horário da sessão" />
+            formControlName="horarioInicio" class="form-control" type="time" placeholder="Insira o horário da sessão" />
           <div class="invalid-tooltip" *ngIf="horarioInicio?.touched && horarioInicio?.invalid">
             <span *ngIf="horarioInicio?.errors?.['required']">O horário precisa ser preenchido.</span>
           </div>

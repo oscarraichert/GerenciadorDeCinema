@@ -7,7 +7,7 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
 {
     public class FormsSessaoViewModel
     {
-        Guid Id { get; set; }
+        public Guid Id { get; set; }
 
         public DateTime Data { get; set; }
 
@@ -30,10 +30,27 @@ namespace GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao
 
     public class VisualizarSessaoViewModel : FormsSessaoViewModel { }
 
-    public class VisualizarSessaoCompletaViewModel : FormsSessaoViewModel
+    public class VisualizarSessaoCompletaViewModel
     {
-        [NotMapped]
+        public Guid Id { get; set; }
+
+        public DateTime Data { get; set; }
+
+        public string HorarioInicio { get; set; }
+
+        public decimal ValorIngresso { get; set; }
+
+        public string TipoAnimacao { get; set; }
+
+        public string TipoAudio { get; set; }
+
+        public string FilmeId { get; set; }
+
+        public string SalaId { get; set; }
+
         public string TituloFilme { get; set; }
+
+        public string NomeSala { get; set; }
 
         public string HorarioFim { get; set; }
     }

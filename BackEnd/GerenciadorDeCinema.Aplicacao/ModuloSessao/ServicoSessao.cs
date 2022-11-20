@@ -93,6 +93,11 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
         {
             var sessaoResult = SelecionarPorId(id);
 
+            if (sessaoResult.Value.Data < DateTime.Now.AddDays(10))
+            {
+                return Result.Fail(new Error("A sessão só pode ser excluída se faltar mais de 10 dias para que ela ocorra."));
+            }
+
             if (sessaoResult.IsSuccess)
             {
                 return Excluir(sessaoResult.Value);
@@ -114,19 +119,9 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
         {
             var sessao = repositorioSessao.SelecionarPorId(id);
 
-            var filmes = repositorioFilme.SelecionarTodos();
-
             if (sessao == null)
             {
                 return Result.Fail($"Sessao {id} não encontrada");
-            }
-
-            foreach (var filme in filmes)
-            {
-                if (filme.Id == sessao.FilmeId)
-                {
-                    sessao.TituloFilme = filme.Titulo;
-                }
             }
 
             return Result.Ok(sessao);
@@ -135,19 +130,6 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
         public Result<List<Sessao>> SelecionarTodas()
         {
             var sessoes = repositorioSessao.SelecionarTodos();
-
-            var filmes = repositorioFilme.SelecionarTodos();
-
-            foreach (Sessao sessao in sessoes)
-            {
-                foreach (var filme in filmes)
-                {
-                    if (sessao.FilmeId == filme.Id)
-                    {
-                        sessao.TituloFilme = filme.Titulo;
-                    }
-                }
-            }
 
             if (sessoes == null)
             {

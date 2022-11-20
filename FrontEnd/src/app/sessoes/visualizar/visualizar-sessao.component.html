@@ -24,7 +24,7 @@
           <label class="control-label">Data:</label>
         </dt>
         <dd class="col-md-8">
-          {{ sessaoFormVM.data }}
+          {{ sessaoFormVM.data | date }}
         </dd>
 
         <dt class="col-md-4">
@@ -53,6 +53,13 @@
         </dt>
         <dd class="col-md-8">
           {{ sessaoFormVM.tipoAudio }}
+        </dd>
+
+        <dt class="col-md-4">
+          <label class="control-label">Sala:</label>
+        </dt>
+        <dd class="col-md-8">
+          {{ sessaoFormVM.nomeSala }}
         </dd>
 
         <dt class="col-md-4">

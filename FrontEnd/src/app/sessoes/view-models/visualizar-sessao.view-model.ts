@@ -11,4 +11,5 @@ export class VisualizarSessaoViewModel {
   salaId: string;
   horarioFim: string;
   tituloFilme: string;
+  nomeSala: string;
 }

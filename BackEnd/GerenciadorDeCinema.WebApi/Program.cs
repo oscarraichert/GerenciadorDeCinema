@@ -13,6 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.ConfigureDependencyInjection();
 builder.Services.AddAutoMapper(typeof(AppProfileBase));
+builder.Services.ConfigurarSwagger();
 builder.Services.ConfigurarAutenticacao();
 builder.Services.ConfigurarJwt();
 
@@ -37,6 +38,8 @@ app.UseCors(builder => builder
     .Build());
 
 app.ConfigurarSalas();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

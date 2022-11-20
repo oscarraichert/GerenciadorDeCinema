@@ -37,12 +37,12 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSessao
 
         public Sessao SelecionarPorId(Guid id)
         {
-            return sessoes.SingleOrDefault(x => x.Id == id);
+            return sessoes.Include(x => x.Filme).Include(x => x.Sala).SingleOrDefault(x => x.Id == id);
         }
 
         public List<Sessao> SelecionarTodos()
         {
-            return sessoes.ToList();
+            return sessoes.Include(x => x.Filme).ToList();
         }
     }
 }

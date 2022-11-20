@@ -23,6 +23,8 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSessao
             builder.Property(x => x.TipoAudio).IsRequired();
             builder.Property(x => x.FilmeId).IsRequired();
             builder.Property(x => x.SalaId).IsRequired();
+            builder.HasOne(x => x.Filme).WithMany(x => x.Sessoes).HasForeignKey(x => x.FilmeId);
+            builder.HasOne(x => x.Sala).WithMany(x => x.Sessoes).HasForeignKey(x => x.SalaId);
         }
     }
 }

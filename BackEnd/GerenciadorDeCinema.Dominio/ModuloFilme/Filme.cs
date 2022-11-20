@@ -1,5 +1,6 @@
 ﻿using GerenciadorDeCinema.Dominio.Compartilhado;
 using GerenciadorDeCinema.Dominio.ModuloAutenticacao;
+using GerenciadorDeCinema.Dominio.ModuloSessao;
 
 namespace GerenciadorDeCinema.Dominio.Filmes
 {
@@ -11,7 +12,9 @@ namespace GerenciadorDeCinema.Dominio.Filmes
 
         public string Descricao { get; set; }
 
-        public TimeSpan Duracao { get; set; }        
+        public TimeSpan Duracao { get; set; }   
+        
+        public IEnumerable<Sessao> Sessoes { get; set; }
 
         public Filme(string imagem, string titulo, string descricao, TimeSpan duracao)
         {

@@ -27,7 +27,7 @@
           <input [ngClass]="titulo?.touched && titulo?.invalid ? 'is-invalid' : ''" formControlName="titulo"
             class="form-control" type="text" placeholder="Insira o título do filme" />
           <div class="invalid-tooltip" *ngIf="titulo?.touched && titulo?.invalid">
-            <span *ngIf="titulo?.errors?.['required']">O título precisa ser selecionado.</span>
+            <span *ngIf="titulo?.errors?.['required']">O título precisa ser inserido.</span>
           </div>
         </div>
 
@@ -43,7 +43,7 @@
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Duração:</label>
           <input [ngClass]="duracao?.touched && duracao?.invalid ? 'is-invalid' : ''" formControlName="duracao"
-            class="form-control" type="text" placeholder="Insira a duracao do filme" />
+            class="form-control" type="time" placeholder="Insira a duracao do filme" />
           <div class="invalid-tooltip" *ngIf="duracao?.touched && duracao?.invalid">
             <span *ngIf="duracao?.errors?.['required']">A duração precisa ser preenchida.</span>
           </div>

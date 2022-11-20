@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { timeout } from 'rxjs';
 import { SessaoService } from '../services/sessao.service';
+import { TipoAnimacaoEnum } from '../view-models/forms-sessao.view-model';
 import { VisualizarSessaoViewModel } from '../view-models/visualizar-sessao.view-model';
 
 @Component({
@@ -27,5 +28,4 @@ export class VisualizarSessaoComponent implements OnInit {
   ngOnInit(): void {
     this.sessaoFormVM = this.route.snapshot.data['sessao'];
   }
-
 }

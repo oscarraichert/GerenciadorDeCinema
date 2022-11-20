@@ -3,6 +3,7 @@ using GerenciadorDeCinema.Dominio.Filmes;
 using GerenciadorDeCinema.Dominio.ModuloSala;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -24,15 +25,13 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
 
         public TipoAudio TipoAudio { get; set; }
 
-        [NotMapped]
-        public string TituloFilme { get; set; }
-
         public Guid FilmeId { get; set; }
 
-        [NotMapped]
         public Sala Sala { get; set; }
 
-        public string SalaId { get; set; }
+        public Filme Filme { get; set; }
+
+        public Guid SalaId { get; set; }
 
         public Sessao()
         {
@@ -42,13 +41,17 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
 
     public enum TipoAnimacao
     {
+        [Description("2D")]
         _2D,
+        [Description("3D")]
         _3D
     }
     
     public enum TipoAudio
     {
+        [Description("Original")]
         Original,
+        [Description("Dublado")]
         Dublado
     }
 }

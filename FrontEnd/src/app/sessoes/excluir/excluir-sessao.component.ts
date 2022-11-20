@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { SessaoService } from '../services/sessao.service';
 import { TipoAnimacaoEnum, TipoAudioEnum } from '../view-models/forms-sessao.view-model';
 import { VisualizarSessaoViewModel } from '../view-models/visualizar-sessao.view-model';
@@ -23,7 +24,8 @@ export class ExcluirSessaoComponent implements OnInit {
     titulo: Title,
     private route: ActivatedRoute,
     private router: Router,
-    private sessaoService: SessaoService
+    private sessaoService: SessaoService,
+    private toastr: ToastrService
   ) {
     titulo.setTitle('Excluir sessão')
   }
@@ -34,8 +36,6 @@ export class ExcluirSessaoComponent implements OnInit {
 
   public gravar() {
 
-    console.log(this.sessaoFormVM);
-
     this.sessaoService.excluir(this.sessaoFormVM.id)
       .subscribe({
         next: () => this.processarSucesso(),
@@ -45,11 +45,13 @@ export class ExcluirSessaoComponent implements OnInit {
 
   private processarSucesso(): void {
     this.router.navigate(['/sessoes/listar']);
+    this.toastr.success('Sessão exlcuída com sucesso!', 'Excluir Sessão');
   }
 
   private processarFalha(erro: any) {
     if (erro) {
       console.error(erro);
     }
+    this.toastr.error(erro, 'Erro');
   }
 }

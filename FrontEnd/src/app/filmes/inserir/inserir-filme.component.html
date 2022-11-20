@@ -43,7 +43,7 @@
         <div class="form-group mb-3 position-relative">
           <label class="form-label">Duração:</label>
           <input [ngClass]="duracao?.touched && duracao?.invalid ? 'is-invalid' : ''" formControlName="duracao"
-            class="form-control" type="text" placeholder="Insira a duracao do filme" />
+            class="form-control" type="time" placeholder="Insira a duracao do filme" />
           <div class="invalid-tooltip" *ngIf="duracao?.touched && duracao?.invalid">
             <span *ngIf="duracao?.errors?.['required']">A duração precisa ser preenchida.</span>
           </div>

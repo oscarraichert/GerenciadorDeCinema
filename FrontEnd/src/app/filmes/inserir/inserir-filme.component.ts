@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FilmeService } from '../services/filme.service';
 import { FormsFilmeViewModel } from '../view-models/forms-filme.view-model';
 
@@ -23,7 +24,8 @@ export class InserirFilmeComponent implements OnInit {
     titulo: Title,
     private formBuilder: FormBuilder,
     private filmeService: FilmeService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     titulo.setTitle('Inserir Filme');
   }
@@ -73,7 +75,12 @@ export class InserirFilmeComponent implements OnInit {
 
   public gravar() {
 
-    if (this.formFilme.invalid) return;
+    if (this.formFilme.invalid) {
+      this.toastr.toastrConfig.positionClass = 'toast-bottom-right';
+      this.toastr.error('Os dados não estão corretamente preenchidos.', 'Erro ao cadastrar!');
+
+      return;
+    }
 
     this.filmeFormVM = Object.assign({}, this.filmeFormVM, this.formFilme.value);
 
@@ -86,6 +93,7 @@ export class InserirFilmeComponent implements OnInit {
 
   private processarSucesso(tarefa: FormsFilmeViewModel): void {
     this.router.navigate(['/filmes/listar']);
+    this.toastr.success('Filme inserido com sucesso!', 'Inserir Filme');
   }
 
   private processarFalha(erro: any) {

@@ -10,8 +10,8 @@ export class FormsSessaoViewModel {
 }
 
 export enum TipoAnimacaoEnum {
-  "2D" = 0,
-  "3D" = 1
+  "2D",
+  "3D"
 }
 
 export enum TipoAudioEnum {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { FilmeService } from '../services/filme.service';
 import { VisualizarFilmeViewModel } from '../view-models/visualizar-filme.view-model';
 
@@ -18,13 +19,16 @@ export class ExcluirFilmeComponent implements OnInit {
     titulo: Title,
     private route: ActivatedRoute,
     private router: Router,
-    private filmeService: FilmeService
+    private filmeService: FilmeService,
+    private toastr: ToastrService
   ) {
     titulo.setTitle('Excluir filme');
   }
 
   ngOnInit(): void {
     this.filmeFormVM = this.route.snapshot.data['filme'];
+
+    this.toastr.toastrConfig.positionClass = 'toast-bottom-right';
   }
 
   public gravar() {
@@ -37,11 +41,13 @@ export class ExcluirFilmeComponent implements OnInit {
 
   private processarSucesso(): void {
     this.router.navigate(['/filmes/listar']);
+    this.toastr.success('Filme exlcuído com sucesso!', 'Excluir Filme');
   }
 
   private processarFalha(erro: any) {
     if (erro) {
       console.error(erro);
     }
+    this.toastr.error(erro, 'Excluir Filme');
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { FilmeService } from 'src/app/filmes/services/filme.service';
 import { ListarFilmeViewModel } from 'src/app/filmes/view-models/listar-filme.view-model';
@@ -36,12 +37,15 @@ export class InserirSessaoComponent implements OnInit {
     private filmeService: FilmeService,
     private salaService: SalaService,
     private router: Router,
+    private toastr: ToastrService
 
   ) {
     titulo.setTitle('Inserir Sessão');
   }
 
   ngOnInit(): void {
+
+    this.toastr.toastrConfig.positionClass = "toast-bottom-right";
 
     this.obterSalas();
 
@@ -110,7 +114,10 @@ export class InserirSessaoComponent implements OnInit {
 
   public gravar() {
 
-    if (this.formSessao.invalid) return;
+    if (this.formSessao.invalid) {
+      this.toastr.error('Os dados não estão corretamente preenchidos.', 'Erro ao cadastrar!');
+      return;
+    }
 
     this.sessaoFormVM = Object.assign({}, this.sessaoFormVM, this.formSessao.value);
 
@@ -123,11 +130,13 @@ export class InserirSessaoComponent implements OnInit {
 
   private processarSucesso(sessao: FormsSessaoViewModel): void {
     this.router.navigate(['/sessoes/listar']);
+    this.toastr.success('Sessão inserida com sucesso!', 'Inserir Sessão');
   }
 
   private processarFalha(erro: any) {
     if (erro) {
       console.error(erro);
     }
+    this.toastr.error(erro, 'Erro');
   }
 }

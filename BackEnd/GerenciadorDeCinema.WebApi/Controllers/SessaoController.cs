@@ -2,6 +2,7 @@
 using GerenciadorDeCinema.Aplicacao.ModuloSessao;
 using GerenciadorDeCinema.Dominio.ModuloSessao;
 using GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
 {
     [Route("api/sessoes")]
     [ApiController]
+    [Authorize]
     public class SessaoController : GerenciadorDeCinemaControllerBase
     {
         private readonly ServicoSessao servicoSessao;

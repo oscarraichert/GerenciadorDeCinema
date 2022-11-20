@@ -2,6 +2,7 @@
 using GerenciadorDeCinema.Aplicacao.ModuloFilme;
 using GerenciadorDeCinema.Dominio.Filmes;
 using GerenciadorDeCinema.WebApi.ViewModels.ModuloFilme;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
 {
     [Route("api/filmes")]
     [ApiController]
+    [Authorize]
     public class FilmeController : GerenciadorDeCinemaControllerBase
     {
         private readonly ServicoFilme servicoFilme;

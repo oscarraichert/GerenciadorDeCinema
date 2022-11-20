@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { NavbarModule } from './navbar/navbar.module';
-import { ListarSalaComponent } from './salas/listar/listar-sala.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import { ListarSalaComponent } from './salas/listar/listar-sala.component';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
 
     CoreModule,
     AuthModule,
