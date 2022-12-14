@@ -9,6 +9,6 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
 {
     public interface IRepositorioSessao: IRepositorio<Sessao>
     {
-
+        void Excluir(Guid id);
     }
 }

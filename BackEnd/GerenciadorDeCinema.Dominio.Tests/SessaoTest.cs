@@ -13,7 +13,6 @@ namespace GerenciadorDeCinema.Dominio.Tests
 {
     public class SessaoTest
     {
-
         [Test]
         public void nao_deve_validar_data_passada()
         {
@@ -27,7 +26,7 @@ namespace GerenciadorDeCinema.Dominio.Tests
             sessao.TipoAnimacao = TipoAnimacao._3D;
             sessao.TipoAudio = TipoAudio.Original;
             sessao.FilmeId = Guid.NewGuid();
-            sessao.SalaId = Guid.NewGuid().ToString();
+            sessao.SalaId = Guid.NewGuid();
 
             var resultado = validador.Validate(sessao);
 
@@ -48,7 +47,7 @@ namespace GerenciadorDeCinema.Dominio.Tests
             sessao.TipoAnimacao = TipoAnimacao._3D;
             sessao.TipoAudio = TipoAudio.Original;
             sessao.FilmeId = Guid.NewGuid();
-            sessao.SalaId = Guid.NewGuid().ToString();
+            sessao.SalaId = Guid.NewGuid();
 
             var resultado = validador.Validate(sessao);
 

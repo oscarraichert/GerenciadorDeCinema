@@ -6,18 +6,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace GerenciadorDeCinema.Dominio.Tests
 {
-    public class Tests
+    public class FilmeTest
     {
-
-        public Tests()
-        {
-            
-        }
 
         [Test]
         public void nao_deve_validar_filme()
         {
-            Filme filme = new("imagem", "", "descricao", new TimeSpan(2, 2, 2));
+            Filme filme = new("imagem", "", "descricao", new TimeSpan(1, 00, 47));
 
             ValidadorFilme validador = new();
 
@@ -30,7 +25,7 @@ namespace GerenciadorDeCinema.Dominio.Tests
         [Test]
         public void deve_validar_filme()
         {
-            Filme filme = new("imagem", "titulo", "descricao", new TimeSpan(2, 2, 2));
+            Filme filme = new("imagem", "titulo", "descricao", new TimeSpan(2, 25, 12));
 
             ValidadorFilme validador = new();
 

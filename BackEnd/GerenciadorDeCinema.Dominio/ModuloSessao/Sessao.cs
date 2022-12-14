@@ -35,7 +35,18 @@ namespace GerenciadorDeCinema.Dominio.ModuloSessao
 
         public Sessao()
         {
-                
+
+        }
+
+        public Sessao(DateTime data, TimeSpan horarioInicio, decimal valorIngresso, TipoAnimacao tipoAnimacao, TipoAudio tipoAudio, Guid filmeId, Guid salaId)
+        {
+            Data = data;
+            HorarioInicio = horarioInicio;
+            ValorIngresso = valorIngresso;
+            TipoAnimacao = tipoAnimacao;
+            TipoAudio = tipoAudio;
+            FilmeId = filmeId;
+            SalaId = salaId;
         }
     }
 

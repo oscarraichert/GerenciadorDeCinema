@@ -1,5 +1,7 @@
-﻿using FluentResults;
+﻿using AutoMapper;
+using FluentResults;
 using GerenciadorDeCinema.Aplicacao.Compartilhado;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloSessao;
 using GerenciadorDeCinema.Dominio.ModuloFilme;
 using GerenciadorDeCinema.Dominio.ModuloSessao;
 using GerenciadorDeCinema.Infra.Orm.Compartilhado;
@@ -16,16 +18,20 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
         private readonly IRepositorioFilme repositorioFilme;
         private IRepositorioSessao repositorioSessao;
         private GerenciadorDeCinemaDbContext dbContext;
+        private readonly IMapper mapeadorSessoes;
 
-        public ServicoSessao(IRepositorioFilme repositorioFilme, IRepositorioSessao repositorioSessao, GerenciadorDeCinemaDbContext dbContext)
+        public ServicoSessao(IRepositorioFilme repositorioFilme, IRepositorioSessao repositorioSessao, GerenciadorDeCinemaDbContext dbContext, IMapper mapeadorSessoes)
         {
             this.repositorioFilme = repositorioFilme;
             this.repositorioSessao = repositorioSessao;
             this.dbContext = dbContext;
+            this.mapeadorSessoes = mapeadorSessoes;
         }
 
-        public Result<Sessao> Inserir(Sessao novaSessao)
+        public Result<Sessao> Inserir(InserirSessaoViewModel sessaoVM)
         {
+            var novaSessao = mapeadorSessoes.Map<Sessao>(sessaoVM);
+
             Result resultado = Validar(novaSessao);
 
             if (resultado.IsFailed)
@@ -73,70 +79,76 @@ namespace GerenciadorDeCinema.Aplicacao.ModuloSessao
             return diaHoraFim;
         }
 
-        public Result<Sessao> Editar(Sessao sessao)
+        public Result<Sessao> Editar(EditarSessaoViewModel sessaoVM)
         {
-            Result resultado = Validar(sessao);
+            var sessaoEditada = mapeadorSessoes.Map<Sessao>(sessaoVM);
+
+            Result resultado = Validar(sessaoEditada);
 
             if (resultado.IsFailed)
             {
                 return Result.Fail(resultado.Errors);
             }
 
-            repositorioSessao.Editar(sessao);
+            repositorioSessao.Editar(sessaoEditada);
 
             dbContext.SaveChanges();
 
-            return Result.Ok(sessao);
+            return Result.Ok(sessaoEditada);
         }
 
         public Result Excluir(Guid id)
         {
-            var sessaoResult = SelecionarPorId(id);
+            var sessaoVM = SelecionarPorId(id);
 
-            if (sessaoResult.Value.Data < DateTime.Now.AddDays(10))
+            if (sessaoVM.Value.Data < DateTime.Now.AddDays(10))
             {
                 return Result.Fail(new Error("A sessão só pode ser excluída se faltar mais de 10 dias para que ela ocorra."));
             }
 
-            if (sessaoResult.IsSuccess)
+            if (sessaoVM.IsSuccess)
             {
-                return Excluir(sessaoResult.Value);
+                return Excluir(sessaoVM.Value);
             }
 
-            return Result.Fail(sessaoResult.Errors);
+            return Result.Fail(sessaoVM.Errors);
         }
 
-        private Result Excluir(Sessao sessao)
+        private Result Excluir(VisualizarSessaoCompletaViewModel sessao)
         {
-            repositorioSessao.Excluir(sessao);
+            repositorioSessao.Excluir(sessao.Id);
 
             dbContext.SaveChanges();
 
             return Result.Ok();
         }
 
-        public Result<Sessao> SelecionarPorId(Guid id)
+        public Result<VisualizarSessaoCompletaViewModel> SelecionarPorId(Guid id)
         {
-            var sessao = repositorioSessao.SelecionarPorId(id);
+            var sessao = repositorioSessao.SelecionarPorId(id);            
 
             if (sessao == null)
             {
                 return Result.Fail($"Sessao {id} não encontrada");
             }
 
-            return Result.Ok(sessao);
+            var sessaoVM = mapeadorSessoes.Map<VisualizarSessaoCompletaViewModel>(sessao);
+
+            return Result.Ok(sessaoVM);
         }
 
-        public Result<List<Sessao>> SelecionarTodas()
+        public Result<List<ListarSessaoViewModel>> SelecionarTodas()
         {
             var sessoes = repositorioSessao.SelecionarTodos();
+
+            var sessoesVM = mapeadorSessoes.Map<List<ListarSessaoViewModel>>(sessoes);
 
             if (sessoes == null)
             {
                 return Result.Fail("Falha ao tentar selecionar as sessões");
             }
 
-            return Result.Ok(sessoes);
+            return Result.Ok(sessoesVM);
         }
     }
 }

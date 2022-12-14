@@ -14,13 +14,14 @@ namespace GerenciadorDeCinema.Infra.Orm.Compartilhado
 
         public GerenciadorDeCinemaDbContext(IConfiguration config)
         {
-            this.connectionString = config.GetConnectionString("SqlServer");
+            //this.connectionString = config.GetConnectionString("SqlServer");
+            this.connectionString = "Data Source=(LOCALDB)\\MSSQLLOCALDB;Initial Catalog=GerenciadorDeCinema;Integrated Security=True";
             Database.EnsureCreated();
         }
 
         public GerenciadorDeCinemaDbContext()
         {
-            connectionString = "Data Source=(LOCALDB)\\MSSQLLOCALDB;Initial Catalog=GerenciadorDeCinemaTests;Integrated Security=True";
+            connectionString = "Data Source=(LOCALDB)\\MSSQLLOCALDB;Initial Catalog=GerenciadorDeCinema;Integrated Security=True";
             Database.EnsureCreated();
         }
 

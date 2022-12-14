@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloFilme;
 using GerenciadorDeCinema.Dominio.Filmes;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloFilme;
 
 namespace GerenciadorDeCinema.WebApi.Config.AutoMapperConfig
 {
@@ -14,8 +14,13 @@ namespace GerenciadorDeCinema.WebApi.Config.AutoMapperConfig
 
         private void ConverterDeEntidadeParaViewModel()
         {
-            CreateMap<Filme, FormsFilmeViewModel>();
+            CreateMap<Filme, FormsFilmeViewModel>()
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(orig => orig.Id));
+
             CreateMap<Filme, InserirFilmeViewModel>()
+                .ForMember(destino => destino.Duracao, opt => opt.MapFrom(origem => origem.Duracao.ToString(@"hh\:mm\:ss")));
+
+            CreateMap<Filme, VisualizarFilmeViewModel>()
                 .ForMember(destino => destino.Duracao, opt => opt.MapFrom(origem => origem.Duracao.ToString(@"hh\:mm\:ss")));
 
             CreateMap<Filme, ListarFilmeViewModel>()
@@ -25,12 +30,19 @@ namespace GerenciadorDeCinema.WebApi.Config.AutoMapperConfig
         private void ConverterDeViewModelParaEntidade()
         {
             CreateMap<InserirFilmeViewModel, Filme>()
-                .ForMember(destino => destino.Id, opt => opt.Ignore());           
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(orig => orig.Id));
 
-            CreateMap<FormsFilmeViewModel, Filme>();
+            CreateMap<FormsFilmeViewModel, Filme>()
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(orig => orig.Id));
 
             CreateMap<EditarFilmeViewModel, Filme>()
-                .ForMember(d => d.Id, opt => opt.Ignore());
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(orig => orig.Id));
+
+            CreateMap<VisualizarFilmeViewModel, Filme>()
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(orig => orig.Id));
+
+            CreateMap<EditarFilmeViewModel, VisualizarFilmeViewModel>()
+                .ForMember(destino => destino.Id, opt => opt.MapFrom(orig => orig.Id));
         }
     }
 }

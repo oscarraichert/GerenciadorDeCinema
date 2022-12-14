@@ -14,7 +14,7 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSessao
         public void Configure(EntityTypeBuilder<Sessao> builder)
         {
             builder.ToTable("TBSessao");
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.Data).IsRequired();
             builder.Property(x => x.HorarioInicio).IsRequired();
             builder.Property(x => x.HorarioFim).IsRequired();

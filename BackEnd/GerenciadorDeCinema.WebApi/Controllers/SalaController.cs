@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GerenciadorDeCinema.Aplicacao.ModuloSala;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloSala;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloSala;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +13,10 @@ namespace GerenciadorDeCinema.WebApi.Controllers
     public class SalaController : GerenciadorDeCinemaControllerBase
     {
         private readonly ServicoSala servicoSala;
-        private readonly IMapper mapeadorSalas;
 
         public SalaController(ServicoSala servicoSala, IMapper mapeadorSalas)
         {
             this.servicoSala = servicoSala;
-            this.mapeadorSalas = mapeadorSalas;
         }
 
         [HttpGet]
@@ -34,7 +32,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = mapeadorSalas.Map<List<ListarSalaViewModel>>(salaResult.Value)
+                dados = salaResult.Value
             });
         }
     }

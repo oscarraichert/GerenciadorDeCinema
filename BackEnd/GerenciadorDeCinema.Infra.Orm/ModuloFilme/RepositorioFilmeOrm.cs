@@ -28,7 +28,7 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloFilme
 
         public void Excluir(Filme registro)
         {
-            filmes.Remove(registro);
+            throw new NotImplementedException();
         }
 
         public void Inserir(Filme novoRegistro)
@@ -41,6 +41,11 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloFilme
             return filmes.SingleOrDefault(x => x.Id == id);
         }
 
+        public Filme SelecionarPorTitulo(string titulo)
+        {
+            return filmes.SingleOrDefault(x => x.Titulo == titulo);
+        }
+
         public List<Filme> SelecionarTodos()
         {
             return filmes.ToList();
@@ -49,6 +54,11 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloFilme
         public bool VerificarTituloRepetido(Filme novoFilme)
         {
             return filmes.Any(x => x.Titulo == novoFilme.Titulo);
+        }
+
+        public void Excluir(Guid id)
+        {
+            filmes.Remove(SelecionarPorId(id));
         }
     }
 }

@@ -11,5 +11,7 @@ namespace GerenciadorDeCinema.Dominio.ModuloFilme
     public interface IRepositorioFilme: IRepositorio<Filme>
     {
         public bool VerificarTituloRepetido(Filme filme);
+
+        void Excluir(Guid id);
     }
 }

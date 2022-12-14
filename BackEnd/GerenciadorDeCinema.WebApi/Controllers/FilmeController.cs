@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GerenciadorDeCinema.Aplicacao.ModuloFilme;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloFilme;
 using GerenciadorDeCinema.Dominio.Filmes;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloFilme;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +14,16 @@ namespace GerenciadorDeCinema.WebApi.Controllers
     public class FilmeController : GerenciadorDeCinemaControllerBase
     {
         private readonly ServicoFilme servicoFilme;
-        private readonly IMapper mapeadorFilmes;
 
-        public FilmeController(ServicoFilme servicoFilme, IMapper mapeadorFilmes)
+        public FilmeController(ServicoFilme servicoFilme)
         {
             this.servicoFilme = servicoFilme;
-            this.mapeadorFilmes = mapeadorFilmes;
         }
 
         [HttpPost]
-        public ActionResult<FormsFilmeViewModel> Inserir(InserirFilmeViewModel filmeVM)
+        public ActionResult<Filme> Inserir(InserirFilmeViewModel filmeVM)
         {
-            var filme = mapeadorFilmes.Map<Filme>(filmeVM);
-
-            var filmeResult = servicoFilme.Inserir(filme);
+            var filmeResult = servicoFilme.Inserir(filmeVM);
 
             if (filmeResult.IsFailed)
             {
@@ -37,23 +33,14 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = filmeVM
+                dados = filmeResult.Value
             });
         }
 
         [HttpPut("{id:guid}")]
-        public ActionResult<FormsFilmeViewModel> Editar(Guid id, EditarFilmeViewModel filmeVM)
+        public ActionResult<Filme> Editar(Guid id, EditarFilmeViewModel filmeVM)
         {
-            var filmeResult = servicoFilme.SelecionarPorId(id);
-
-            if (filmeResult.IsFailed && RegistroNaoEncontrado(filmeResult))
-            {
-                return NotFound(filmeResult);
-            }
-
-            var filme = mapeadorFilmes.Map(filmeVM, filmeResult.Value);
-
-            filmeResult = servicoFilme.Editar(filme);
+            var filmeResult = servicoFilme.Editar(filmeVM);
 
             if (filmeResult.IsFailed)
             {
@@ -63,7 +50,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = filmeVM
+                dados = filmeResult.Value
             });
         }
 
@@ -98,7 +85,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = mapeadorFilmes.Map<List<ListarFilmeViewModel>>(filmeResult.Value)
+                dados = filmeResult.Value
             });
         }
 
@@ -120,7 +107,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = mapeadorFilmes.Map<FormsFilmeViewModel>(filmeResult.Value)
+                dados = filmeResult.Value
             });
         }
     }

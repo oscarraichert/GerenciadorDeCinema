@@ -18,9 +18,9 @@ export class VisualizarFilmeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.filmeFormVM = this.route.snapshot.data['filme'];
   }
 
   ngOnInit(): void {
+    this.filmeFormVM = this.route.snapshot.data['filme'];
   }
 }

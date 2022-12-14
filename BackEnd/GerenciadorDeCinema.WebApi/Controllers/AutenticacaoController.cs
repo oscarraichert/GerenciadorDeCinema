@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GerenciadorDeCinema.Aplicacao.ModuloAutenticacao;
 using GerenciadorDeCinema.Dominio.ModuloAutenticacao;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloAutenticacao;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloAutenticacao;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -27,20 +27,28 @@ namespace GerenciadorDeCinema.WebApi.Controllers
         [HttpPost("registrar")]
         public async Task<ActionResult> RegistrarUsuario(RegistrarUsuarioViewModel usuarioVM)
         {
-            var usuario = mapeadorUsuario.Map<Usuario>(usuarioVM);
-
-            var usuarioResult = await servicoAutenticacao.RegistrarUsuario(usuario, usuarioVM.Senha);
-
-            if (usuarioResult.IsFailed)
+            try
             {
-                return InternalError(usuarioResult);
+                var usuario = mapeadorUsuario.Map<Usuario>(usuarioVM);
+
+                var usuarioResult = await servicoAutenticacao.RegistrarUsuario(usuario, usuarioVM.Senha);
+
+                if (usuarioResult.IsFailed)
+                {
+                    return BadRequest(usuarioResult);
+                }
+
+                return Ok(new
+                {
+                    sucesso = true,
+                    dados = GerarJwt(usuarioResult.Value)
+                });
             }
-
-            return Ok(new
+            catch (Exception e)
             {
-                sucesso = true,
-                dados = GerarJwt(usuarioResult.Value)
-            });
+
+                return Ok(e.Message);
+            }            
         }
 
         [HttpPost("autenticar")]

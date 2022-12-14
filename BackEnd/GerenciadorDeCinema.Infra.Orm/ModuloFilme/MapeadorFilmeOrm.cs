@@ -14,7 +14,7 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloFilme
         public void Configure(EntityTypeBuilder<Filme> builder)
         {
             builder.ToTable("TBFilme");
-            builder.Property(x => x.Id).ValueGeneratedNever();
+            builder.Property(x => x.Id).IsRequired();
             builder.Property(x => x.Imagem).IsRequired();
             builder.Property(x => x.Titulo).IsRequired();
             builder.Property(x => x.Descricao).IsRequired();

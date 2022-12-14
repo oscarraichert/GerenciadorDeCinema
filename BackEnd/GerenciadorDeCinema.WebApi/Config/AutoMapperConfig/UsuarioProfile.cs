@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GerenciadorDeCinema.Dominio.ModuloAutenticacao;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloAutenticacao;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloAutenticacao;
 
 namespace GerenciadorDeCinema.WebApi.Config.AutoMapperConfig
 {

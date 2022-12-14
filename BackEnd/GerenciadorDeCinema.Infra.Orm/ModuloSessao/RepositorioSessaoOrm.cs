@@ -30,9 +30,9 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSessao
             sessoes.Update(registro);
         }
 
-        public void Excluir(Sessao registro)
+        public void Excluir(Guid id)
         {
-            sessoes.Remove(registro);
+            sessoes.Remove(SelecionarPorId(id));
         }
 
         public Sessao SelecionarPorId(Guid id)
@@ -43,6 +43,11 @@ namespace GerenciadorDeCinema.Infra.Orm.ModuloSessao
         public List<Sessao> SelecionarTodos()
         {
             return sessoes.Include(x => x.Filme).ToList();
+        }
+
+        public void Excluir(Sessao registro)
+        {
+            throw new NotImplementedException();
         }
     }
 }

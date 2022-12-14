@@ -5,33 +5,34 @@ using GerenciadorDeCinema.Dominio.ModuloSessao;
 using GerenciadorDeCinema.Infra.Orm.Compartilhado;
 using GerenciadorDeCinema.Infra.Orm.ModuloFilme;
 using GerenciadorDeCinema.Infra.Orm.ModuloSessao;
+using GerenciadorDeCinema.WebApi;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace GerenciadorDeCinema.Infra.Tests
 {
-    public class TesteSessaoInfra
+    internal class TesteSessaoInfra : IClassFixture<WebApplicationFactory<Program>>
     {
-        private ServicoSessao servicoSessao;
-        private ServicoFilme servicoFilme;
-        private RepositorioSessaoOrm repositorioSessao;
-        private RepositorioFilmeOrm repositorioFilme;
-        private GerenciadorDeCinemaDbContext dbContext;
+        private readonly WebApplicationFactory<Program> factory;
 
-        public TesteSessaoInfra()
-        {
-            dbContext = new();
-            repositorioSessao = new(dbContext);
-            servicoSessao = new(repositorioFilme, repositorioSessao, dbContext);
-
+        [OneTimeSetUp]
+        public TesteSessaoInfra(WebApplicationFactory<Program> factory)
+        {            
+            this.factory = factory;
         }
 
         [Test]
-        public void deve_inserir_a_entidade_no_banco()
+        public async Task deve_retornar_sucesso()
         {
+            var client = factory.CreateClient();
+
             Filme filme = new(
                 "imagem teste",
                 "titulo teste",
@@ -39,7 +40,7 @@ namespace GerenciadorDeCinema.Infra.Tests
                 new TimeSpan(1, 30, 25)
                 );
 
-            servicoFilme.Inserir(filme);
+            //servicoFilme.Inserir(filme);
 
             Sessao sessao = new();
 
@@ -49,16 +50,12 @@ namespace GerenciadorDeCinema.Infra.Tests
             sessao.TipoAnimacao = TipoAnimacao._3D;
             sessao.TipoAudio = TipoAudio.Original;
             sessao.FilmeId = filme.Id;
-            sessao.SalaId = Guid.NewGuid().ToString();
+            sessao.SalaId = Guid.NewGuid();
 
-            servicoSessao.Inserir(sessao);
+            var response = await client.PostAsync("/api/sessoes", new StringContent(JsonConvert.SerializeObject(sessao)));
 
-            var sessaoBanco = servicoSessao.SelecionarPorId(sessao.Id);
-
-            Assert.AreEqual(sessao.Id, sessaoBanco.Value.Id);
-
-            servicoSessao.Excluir(sessao.Id);
-            servicoFilme.Excluir(filme.Id);
+            response.EnsureSuccessStatusCode();
+            Assert.AreEqual("text/html; charset=utf-8", response.Content.Headers.ContentType.ToString());
         }
 
         [Test]

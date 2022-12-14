@@ -2,6 +2,7 @@ using GerenciadorDeCinema.Aplicacao.ModuloFilme;
 using GerenciadorDeCinema.Dominio.Filmes;
 using GerenciadorDeCinema.Infra.Orm.Compartilhado;
 using GerenciadorDeCinema.Infra.Orm.ModuloFilme;
+using GerenciadorDeCinema.Infra.Orm.ModuloSessao;
 
 namespace GerenciadorDeCinema.Infra.Tests
 {
@@ -9,14 +10,15 @@ namespace GerenciadorDeCinema.Infra.Tests
     {
         private ServicoFilme servicoFilme;
         private RepositorioFilmeOrm repositorioFilme;
+        private RepositorioSessaoOrm repositorioSessao;
         private GerenciadorDeCinemaDbContext dbContext;
 
         public Tests()
         {
             dbContext = new();
             repositorioFilme = new(dbContext);
-            servicoFilme = new(repositorioFilme, dbContext);
-
+            repositorioSessao = new(dbContext);
+            servicoFilme = new(repositorioFilme, repositorioSessao, dbContext);
         }
 
         [Test]

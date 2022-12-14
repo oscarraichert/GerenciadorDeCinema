@@ -1,5 +1,5 @@
-﻿using GerenciadorDeCinema.Dominio.ModuloSala;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloSala;
+﻿using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloSala;
+using GerenciadorDeCinema.Dominio.ModuloSala;
 
 namespace GerenciadorDeCinema.WebApi.Config.AutoMapperConfig
 {

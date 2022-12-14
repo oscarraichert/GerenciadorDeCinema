@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GerenciadorDeCinema.Aplicacao.ModuloSessao;
 using GerenciadorDeCinema.Dominio.ModuloSessao;
-using GerenciadorDeCinema.WebApi.ViewModels.ModuloSessao;
+using GerenciadorDeCinema.Aplicacao.ViewModels.ModuloSessao;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,20 +14,16 @@ namespace GerenciadorDeCinema.WebApi.Controllers
     public class SessaoController : GerenciadorDeCinemaControllerBase
     {
         private readonly ServicoSessao servicoSessao;
-        private readonly IMapper mapeadorSessoes;
 
         public SessaoController(ServicoSessao servicoSessao, IMapper mapeadorSessoes)
         {
             this.servicoSessao = servicoSessao;
-            this.mapeadorSessoes = mapeadorSessoes;
         }
 
         [HttpPost]
-        public ActionResult<FormsSessaoViewModel> Inserir(InserirSessaoViewModel sessaoVM)
+        public ActionResult<Sessao> Inserir(InserirSessaoViewModel sessaoVM)
         {
-            var sessao = mapeadorSessoes.Map<Sessao>(sessaoVM);
-
-            var sessaoResult = servicoSessao.Inserir(sessao);
+            var sessaoResult = servicoSessao.Inserir(sessaoVM);
 
             if (sessaoResult.IsFailed)
             {
@@ -44,26 +40,17 @@ namespace GerenciadorDeCinema.WebApi.Controllers
         [HttpPut("{id:guid}")]
         public ActionResult<FormsSessaoViewModel> Editar(Guid id, EditarSessaoViewModel sessaoVM)
         {
-            var sessaoResult = servicoSessao.SelecionarPorId(id);
+            var sessaoEditada = servicoSessao.Editar(sessaoVM);
 
-            if (sessaoResult.IsFailed && RegistroNaoEncontrado(sessaoResult))
+            if (sessaoEditada.IsFailed)
             {
-                return NotFound(sessaoResult);
-            }
-
-            var sessao = mapeadorSessoes.Map(sessaoVM, sessaoResult.Value);
-
-            sessaoResult = servicoSessao.Editar(sessao);
-
-            if (sessaoResult.IsFailed)
-            {
-                return InternalError(sessaoResult);
+                return InternalError(sessaoEditada);
             }
 
             return Ok(new
             {
                 sucesso = true,
-                dados = sessaoVM
+                dados = sessaoEditada.Value
             });
         }
 
@@ -98,7 +85,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = mapeadorSessoes.Map<List<ListarSessaoViewModel>>(sessaoResult.Value)
+                dados = sessaoResult.Value
             });
         }
 
@@ -120,7 +107,7 @@ namespace GerenciadorDeCinema.WebApi.Controllers
             return Ok(new
             {
                 sucesso = true,
-                dados = mapeadorSessoes.Map<VisualizarSessaoCompletaViewModel>(sessaoResult.Value)
+                dados = sessaoResult.Value
             });
         }
     }
